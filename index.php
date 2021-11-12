@@ -1,9 +1,19 @@
 <?php
 /////////////EMAIL//////////////////////
-if (false !== filter_var($_GET["validacionEmail"], FILTER_VALIDATE_EMAIL)) {
-    echo 'Bien introducido';
+if (false !== filter_var($_GET["validacionEmail"], FILTER_VALIDATE_EMAIL/*, FILTER_SANITIZE_EMAIL*/)) {
+    $email = $_GET["validacionEmail"];
+    echo 'Bien introducido<br/>';
+    echo $email;
 } else {
-    echo 'Mail mal introducido';
+    $email = $_GET["validacionEmail"];
+    echo 'Mail mal introducido<br/>';
+    echo $email;
+}
+/////////////WEB//////////////////////
+if (false !== filter_var($_GET["validacionWeb"], FILTER_VALIDATE_URL/*, FILTER_SANITIZE_URL*/)) {
+    echo 'Bien introducido<br/>';
+} else {
+    echo 'Web mal introducido';
 }
 /////////////CONTRASEÑA//////////////////////
 $contra = filter_input(INPUT_GET, 'contra', FILTER_SANITIZE_STRING);
@@ -16,16 +26,15 @@ if (isset($_GET['Enviar'])) {
     if (!$especial) {
         echo "La contraseña debe tener un caracter especial!";
     }
-    if(!$mayus || !$minus){
+    if (!$mayus || !$minus) {
         echo "<br>La contraseña debe tener MAYUS y MINUS!";
     }
-    if(!$num){
+    if (!$num) {
         echo "<br>La contraseña debe tener almenos un número!";
     }
-    if( strlen($contra) < 8 || strlen($contra) > 16){
+    if (strlen($contra) < 8 || strlen($contra) > 16) {
         echo "<br>La contraseña debe tener entre 8 y 16 caracteres!";
-    }
-    else {
+    } else {
         echo "Todo piola :)";
     }
 }
@@ -43,19 +52,24 @@ if (isset($_GET['Enviar'])) {
 
 <body>
     <h1>Formulario de Acceso</h1>
+    <h2>Correo</h2>
     <form action="index.php" method="get">
         <input name="validacionEmail" type="text" />
         <button type="submit" title="validacionEmail">enviar</button>
         <!--submit para enviar los datos-->
-        <h1>Contraseña</h1>
-        <form method="get" action="index.php">
-    <input type="text" name="contra"  value=""/>
+    </form>
+    <h2>Contraseña</h2>
+    <form method="get" action="index.php">
+        <input type="text" name="contra" value="" />
 
-    <input type="submit" name="Enviar" />
-</form>
+        <input type="submit" name="Enviar" />
+    </form>
+    <h2>Web</h2>
+    <form action="index.php" method="get">
+        <input name="validacionWeb" type="text" />
+        <button type="submit" title="validacionWeb">enviar</button>
+        <!--submit para enviar los datos-->
     </form>
 </body>
 
 </html>
-
-
