@@ -26,7 +26,7 @@ if (isset($_GET['Enviar'])) {
         echo "<br>La contraseña debe tener entre 8 y 16 caracteres!";
     }
     else {
-        echo 'Strong password.';
+        echo "Todo piola :)";
     }
 }
 
