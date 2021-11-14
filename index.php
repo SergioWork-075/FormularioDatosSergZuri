@@ -1,5 +1,5 @@
 <?php
-/////////////EMAIL//////////////////////
+/////////////eMAIL//////////////////////
 if (false !== filter_var($_GET["validacionEmail"], FILTER_VALIDATE_EMAIL/*, FILTER_SANITIZE_EMAIL*/)) {
     $email = $_GET["validacionEmail"];
     echo 'Bien introducido<br/>';
