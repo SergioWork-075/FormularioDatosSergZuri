@@ -12,7 +12,7 @@ $minus = preg_match('@[a-z]@', $contra);
 $num = preg_match('@[0-9]@', $contra);
 $especial = preg_match('@[^\w]@', $contra);
 
-/////////////WEB///////////////////////////////////
+////////////WEB///////////////////////
 $web = filter_input(INPUT_GET, 'validacionWeb', FILTER_SANITIZE_STRING);
 $webprueba= preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$web);
 
@@ -21,7 +21,7 @@ if (isset($_GET['Enviar'])) {
     if ($letras) {
         echo "<br>NOMBRE:Has introducido algun caracter que no es una letra<br/>";
     }
-    /////////////eMAIL//////////////////////
+    /////////////ESMAIL//////////////////////
     if (false !== filter_var($_GET["validacionEmail"], FILTER_VALIDATE_EMAIL/*, FILTER_SANITIZE_EMAIL*/)) {
         $email = $_GET["validacionEmail"];
         echo 'EMAIL:Bien introducido<br/>';
@@ -88,4 +88,3 @@ if (isset($_GET['Enviar'])) {
 </body>
 
 </html>
-
