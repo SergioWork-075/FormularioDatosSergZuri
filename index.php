@@ -33,6 +33,7 @@ if (isset($_GET['Enviar'])) {
     } else {
         echo 'WEB:Web mal introducido';
     }
+    /////////////CONTRASEÑA//////////////////////
     if (!$especial) {
         echo "PASS:La contraseña debe tener un caracter especial!";
     }
@@ -76,6 +77,7 @@ if (isset($_GET['Enviar'])) {
         <input type="text" name="contra" value="" />
         <h2>Web</h2>
         <input name="validacionWeb" type="text" />
+        
         <input type="submit" name="Enviar" />
         
     </form>
