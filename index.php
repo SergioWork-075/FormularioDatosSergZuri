@@ -3,7 +3,9 @@
 $nombre = filter_input(INPUT_GET, 'nombre', FILTER_SANITIZE_STRING);
 $apelli = filter_input(INPUT_GET, 'apellido', FILTER_SANITIZE_STRING);
 $ciudad = filter_input(INPUT_GET, 'ciudad', FILTER_SANITIZE_STRING);
-$letras = preg_match('@[^A-Za-z]@', $nombre);
+$letrasNom = preg_match('@[^A-Za-z]@', $nombre);
+$letrasApe = preg_match('@[^A-Za-z]@', $apelli);
+$letrasCiu = preg_match('@[^A-Za-z]@', $ciudad);
 
 /////////////CONTRASEÑA//////////////////////
 $contra = filter_input(INPUT_GET, 'contra', FILTER_SANITIZE_STRING);
@@ -17,9 +19,24 @@ $web = filter_input(INPUT_GET, 'validacionWeb', FILTER_SANITIZE_STRING);
 $webprueba= preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$web);
 
 if (isset($_GET['Enviar'])) {
+    if(strlen($nombre)<2){
+        echo "NOMBRE:Tiene que contener al menos 2 caracteres<br/>";
+    }
+    if(strlen($apelli)<4){
+        echo "APELLIDOS:Tiene que contener al menos 4 caracteres<br/>";
+    }
+    if(strlen($ciudad)<4){
+        echo "CIUDAD:Tiene que contener al menos 4 caracteres<br/>";
+    }
     /////COMPROBACION QUE NO ESCRIBA NUMEROS////
-    if ($letras) {
-        echo "<br>NOMBRE:Has introducido algun caracter que no es una letra<br/>";
+    if ($letrasNom) {
+        echo "NOMBRE:Has introducido algun caracter que no es una letra<br/>";
+    }
+    if ($letrasApe) {
+        echo "APELLIDO:Has introducido algun caracter que no es una letra<br/>";
+    }
+    if ($letrasCiu) {
+        echo "CIUDAD:Has introducido algun caracter que no es una letra<br/>";
     }
     /////////////ESMAIL//////////////////////
     if (false !== filter_var($_GET["validacionEmail"], FILTER_VALIDATE_EMAIL/*, FILTER_SANITIZE_EMAIL*/)) {
