@@ -70,7 +70,7 @@ if (isset($_GET['Enviar'])) {
         <h2>Ciudad</h2>
         <input name="ciudad" type="text" />
         <h2>Correo</h2>
-        <input name="validacionEmail" type="text" />
+        <input name="validacionEmail" type="email" />
         <h2>Contraseña</h2>
         <input type="text" name="contra" value="" />
         <h2>Web</h2>
