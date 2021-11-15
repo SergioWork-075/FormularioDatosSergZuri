@@ -12,6 +12,7 @@ $minus = preg_match('@[a-z]@', $contra);
 $num = preg_match('@[0-9]@', $contra);
 $especial = preg_match('@[^\w]@', $contra);
 
+/////////////WEB///////////////////////////////////
 $web = filter_input(INPUT_GET, 'validacionWeb', FILTER_SANITIZE_STRING);
 $webprueba= preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$web);
 
