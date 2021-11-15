@@ -13,38 +13,39 @@ $num = preg_match('@[0-9]@', $contra);
 $especial = preg_match('@[^\w]@', $contra);
 
 if (isset($_GET['Enviar'])) {
+    /////COMPROBACION QUE NO ESCRIBA NUMEROS////
+    if ($letras) {
+        echo "<br>NOMBRE:Has introducido algun caracter que no es una letra<br/>";
+    }
     /////////////eMAIL//////////////////////
     if (false !== filter_var($_GET["validacionEmail"], FILTER_VALIDATE_EMAIL/*, FILTER_SANITIZE_EMAIL*/)) {
         $email = $_GET["validacionEmail"];
-        echo 'Bien introducido<br/>';
-        echo $email;
+        echo 'EMAIL:Bien introducido<br/>';
+        echo $email,'<br/>';
     } else {
         $email = $_GET["validacionEmail"];
-        echo 'Mail mal introducido<br/>';
+        echo 'EMAIL:Mail mal introducido<br/>';
         echo $email;
     }
     /////////////WEB//////////////////////
     if (false !== filter_var($_GET["validacionWeb"], FILTER_VALIDATE_URL/*, FILTER_SANITIZE_URL*/)) {
-        echo 'Bien introducido<br/>';
+        echo 'WEB:Bien introducido<br/>';
     } else {
-        echo 'Web mal introducido';
+        echo 'WEB:Web mal introducido';
     }
     if (!$especial) {
-        echo "La contraseña debe tener un caracter especial!";
+        echo "PASS:La contraseña debe tener un caracter especial!";
     }
     if (!$mayus || !$minus) {
-        echo "<br>La contraseña debe tener MAYUS y MINUS!";
-    }
-    if (!$letras) {
-        echo "<br>Has introducido algun caracter que no es un numero";
+        echo "<br>PASS:La contraseña debe tener MAYUS y MINUS!";
     }
     if (!$num) {
-        echo "<br>La contraseña debe tener almenos un número!";
+        echo "<br>PASS:La contraseña debe tener almenos un número!";
     }
     if (strlen($contra) < 8 || strlen($contra) > 16) {
-        echo "<br>La contraseña debe tener entre 8 y 16 caracteres!";
+        echo "<br>PASS:La contraseña debe tener entre 8 y 16 caracteres!";
     } else {
-        echo "Todo piola :)";
+        echo "PASS:Todo piola :)";
     }
 }
 
