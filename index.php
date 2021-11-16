@@ -7,6 +7,13 @@ $letrasNom = preg_match('@[^A-Za-z]@', $nombre);
 $letrasApe = preg_match('@[^A-Za-z]@', $apelli);
 $letrasCiu = preg_match('@[^A-Za-z]@', $ciudad);
 
+/////COMPROBACION QUE NO ESCRIBA LETRAS////
+$telef = filter_input(INPUT_GET, 'telefono', FILTER_SANITIZE_STRING);
+$postal = filter_input(INPUT_GET, 'postal', FILTER_SANITIZE_STRING);
+
+$numerosTlf = preg_match('@[^0-9]@', $telef);
+$numerosPos = preg_match('@[^0-9]@', $postal);
+
 /////////////CONTRASEÑA//////////////////////
 $contra = filter_input(INPUT_GET, 'contra', FILTER_SANITIZE_STRING);
 $mayus = preg_match('@[A-Z]@', $contra);
@@ -19,6 +26,7 @@ $web = filter_input(INPUT_GET, 'validacionWeb', FILTER_SANITIZE_STRING);
 $webprueba= preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$web);
 
 if (isset($_GET['Enviar'])) {
+    /////COMPROBACION LONGITUD////
     if(strlen($nombre)<2){
         echo "NOMBRE:Tiene que contener al menos 2 caracteres<br/>";
     }
@@ -37,6 +45,13 @@ if (isset($_GET['Enviar'])) {
     }
     if ($letrasCiu) {
         echo "CIUDAD:Has introducido algun caracter que no es una letra<br/>";
+    }
+    /////COMPROBACION QUE NO ESCRIBA LETRAS////
+    if ($numerosTlf) {
+        echo "TELEFONO:Has introducido algun caracter que no es un numero<br/>";
+    }
+    if ($numerosPos) {
+        echo "POSTAL:Has introducido algun caracter que no es un numero<br/>";
     }
     /////////////ESMAIL//////////////////////
     if (false !== filter_var($_GET["validacionEmail"], FILTER_VALIDATE_EMAIL/*, FILTER_SANITIZE_EMAIL*/)) {
@@ -92,12 +107,16 @@ if (isset($_GET['Enviar'])) {
     <input name="apellido" type="text" />
     <h2>Ciudad</h2>
     <input name="ciudad" type="text" />
+    <h2>Codigo Postal</h2>
+    <input name="postal" type="number" />
+    <h2>Telefono</h2>
+    <input name="telef" type="tel" />
     <h2>Correo</h2>
     <input name="validacionEmail" type="email" />
     <h2>Contraseña</h2>
-    <input type="text" name="contra" value="" />
+    <input type="password" name="contra" value="" />
     <h2>Web</h2>
-    <input name="validacionWeb" type="text" />
+    <input name="validacionWeb" type="url" />
 
     <input type="submit" name="Enviar" />
 
