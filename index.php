@@ -139,6 +139,27 @@ if (isset($_GET['Enviar'])) {
     <h2>Web</h2>
     <input name="validacionWeb" type="url" />
 
+        <br>
+<?php
+$meses[] = [];
+$string = file_get_contents("./archivo2.txt");
+$array = explode("\n",$string);
+foreach ($array as $fila){
+    $item = explode(" ",$fila);
+
+    ?>
+    <select name="provincias"> <?php
+    for ( $i = 1; $i < 48; $i++ ) {
+        $meses += [ $i => $item[$i] ];
+
+
+        if ($i % 2) {
+            ?>
+            <option value="value1"><?php echo $item[$i];?> </option> <?php
+        }
+    }
+        ?> </select> <?php
+}?>
     <input type="submit" name="Enviar" />
 
 </form>
