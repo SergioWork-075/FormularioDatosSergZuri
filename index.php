@@ -8,7 +8,7 @@ $letrasApe = preg_match('@[^A-Za-z]@', $apelli);
 $letrasCiu = preg_match('@[^A-Za-z]@', $ciudad);
 
 /////COMPROBACION QUE NO ESCRIBA LETRAS////
-$telef = filter_input(INPUT_GET, 'telefono', FILTER_SANITIZE_STRING);
+$telef = filter_input(INPUT_GET, 'telef', FILTER_SANITIZE_STRING);
 $postal = filter_input(INPUT_GET, 'postal', FILTER_SANITIZE_STRING);
 
 $numerosTlf = preg_match('@[^0-9]@', $telef);
@@ -108,7 +108,7 @@ if (isset($_GET['Enviar'])) {
     <h2>Ciudad</h2>
     <input name="ciudad" type="text" />
     <h2>Codigo Postal</h2>
-    <input name="postal" type="number" />
+    <input name="postal" type="text" />
     <h2>Telefono</h2>
     <input name="telef" type="tel" />
     <h2>Correo</h2>
