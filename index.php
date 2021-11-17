@@ -14,6 +14,8 @@ $postal = filter_input(INPUT_GET, 'postal', FILTER_SANITIZE_STRING);
 $numerosTlf = preg_match('@[^0-9]@', $telef);
 $numerosPos = preg_match('@[^0-9]@', $postal);
 
+/////COMPROBACION QUE CONCUERDA EL CP////
+$comprobacionCP = substr($codigoProvincia,0,2);
 /////////////CONTRASEÑA//////////////////////
 $contra = filter_input(INPUT_GET, 'contra', FILTER_SANITIZE_STRING);
 $mayus = preg_match('@[A-Z]@', $contra);
@@ -36,6 +38,12 @@ if (isset($_GET['Enviar'])) {
     if(strlen($ciudad)<4){
         echo "CIUDAD:Tiene que contener al menos 4 caracteres<br/>";
     }
+    if(strlen($telef)>9){
+        echo "TELEFONO:No puede incluir mas de 9 numeros<br/>";
+    }
+    if(strlen($postal)>5){
+        echo "TELEFONO:No puede incluir mas de 5 numeros<br/>";
+    }
     /////COMPROBACION QUE NO ESCRIBA NUMEROS////
     if ($letrasNom) {
         echo "NOMBRE:Has introducido algun caracter que no es una letra<br/>";
@@ -56,7 +64,6 @@ if (isset($_GET['Enviar'])) {
     /////////////ESMAIL//////////////////////
     if (false !== filter_var($_GET["validacionEmail"], FILTER_VALIDATE_EMAIL/*, FILTER_SANITIZE_EMAIL*/)) {
         $email = $_GET["validacionEmail"];
-        echo 'EMAIL:Bien introducido<br/>';
 
     } else {
         $email = $_GET["validacionEmail"];
@@ -66,8 +73,6 @@ if (isset($_GET['Enviar'])) {
     /////////////WEB//////////////////////
     if (!$webprueba) {
         echo 'WEB:Mal introducido<br/>';
-    } else {
-        echo 'WEB:Bien introducido<br>';
     }
     /////////////CONTRASEÑA//////////////////////
     if (!$especial) {
@@ -81,8 +86,6 @@ if (isset($_GET['Enviar'])) {
     }
     if (strlen($contra) < 8 || strlen($contra) > 16) {
         echo "<br>PASS:La contraseña debe tener entre 8 y 16 caracteres!";
-    } else {
-        echo "PASS:Todo piola :)";
     }
 }
 
@@ -105,8 +108,12 @@ if (isset($_GET['Enviar'])) {
     <input name="nombre" type="text" />
     <h2>Apellidos</h2>
     <input name="apellido" type="text" />
+    <h2>Direccion</h2>
+    <input name="direccion" type="text" />
     <h2>Ciudad</h2>
     <input name="ciudad" type="text" />
+    <h2>Provincia</h2>
+    <input name="provincia" type="text" />
     <h2>Codigo Postal</h2>
     <input name="postal" type="text" />
     <h2>Telefono</h2>
