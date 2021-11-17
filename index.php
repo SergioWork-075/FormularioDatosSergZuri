@@ -1,4 +1,17 @@
 <?php
+/////LEER EL TXT////
+$meses = [];
+$string = file_get_contents("archivo.txt");
+$array = explode("\n",$string);
+foreach ($array as $fila){
+    $item = explode(" ",$fila);
+    $meses[] = [
+        'postal' => $item[0],
+        'nombre' => $item[1]
+    ];
+}
+print_r($meses);
+
 /////COMPROBACION QUE NO ESCRIBA NUMEROS////
 $nombre = filter_input(INPUT_GET, 'nombre', FILTER_SANITIZE_STRING);
 $apelli = filter_input(INPUT_GET, 'apellido', FILTER_SANITIZE_STRING);
@@ -15,7 +28,8 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
 $numerosPos = preg_match('@[^0-9]@', $postal);
 
 /////COMPROBACION QUE CONCUERDA EL CP////
-$comprobacionCP = substr($codigoProvincia,0,2);
+//$comprobacionCP = substr($codigoProvincia,0,2);
+
 /////////////CONTRASEÑA//////////////////////
 $contra = filter_input(INPUT_GET, 'contra', FILTER_SANITIZE_STRING);
 $mayus = preg_match('@[A-Z]@', $contra);
