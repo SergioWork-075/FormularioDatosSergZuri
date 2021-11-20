@@ -10,15 +10,15 @@ foreach ($array as $fila){
         'nombre' => $item[1]
     ];
 }
-print_r($meses);
+//print_r($meses);
 
 /////COMPROBACION QUE NO ESCRIBA NUMEROS////
 $nombre = filter_input(INPUT_GET, 'nombre', FILTER_SANITIZE_STRING);
 $apelli = filter_input(INPUT_GET, 'apellido', FILTER_SANITIZE_STRING);
 $ciudad = filter_input(INPUT_GET, 'ciudad', FILTER_SANITIZE_STRING);
-$letrasNom = preg_match('@[^A-Za-z]@', $nombre);
-$letrasApe = preg_match('@[^A-Za-z]@', $apelli);
-$letrasCiu = preg_match('@[^A-Za-z]@', $ciudad);
+$letrasNom = preg_match('@[^A-Za-záéíóúñüç]@', $nombre);
+$letrasApe = preg_match('@[^A-Za-zzáéíóúñüç]@', $apelli);
+$letrasCiu = preg_match('@[^A-Za-zzáéíóúñüç]@', $ciudad);
 
 /////COMPROBACION QUE NO ESCRIBA LETRAS////
 $telef = filter_input(INPUT_GET, 'telef', FILTER_SANITIZE_STRING);
@@ -142,8 +142,35 @@ if (isset($_GET['Enviar'])) {
 
                 if ($i % 2) {
                     ?>
-                    <option value="value1"><?php echo $item[$i];?> </option> <?php
+                    <option value="value1"><?php echo $item[$i];?> </option>
+
+                    <?php
                 }
+
+            }
+            ?> </select> <?php
+    }?>
+
+    <?php
+    $meses[] = [];
+    $string = file_get_contents("./archivo2.txt");
+    $array = explode("\n",$string);
+    foreach ($array as $fila){
+        $item = explode(" ",$fila);
+
+        ?>
+        <select name="provincias"> <?php
+            for ( $i = 1; $i < 48; $i++ ) {
+                $meses += [ $i => $item[$i] ];
+
+
+                if ($i % 2) {
+                    ?>
+                    <option value="value1"><?php echo $item[$i+1];?> </option>
+
+                    <?php
+                }
+
             }
             ?> </select> <?php
     }?>
@@ -156,7 +183,7 @@ if (isset($_GET['Enviar'])) {
     <h2>Contraseña</h2>
     <input type="password" name="contra" value="" />
     <h2>Web</h2>
-    <input name="validacionWeb" type="url" />
+    <input name="validacionWeb" type="text" />
 
         <br>
 
