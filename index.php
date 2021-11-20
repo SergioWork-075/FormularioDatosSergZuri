@@ -127,7 +127,26 @@ if (isset($_GET['Enviar'])) {
     <h2>Ciudad</h2>
     <input name="ciudad" type="text" />
     <h2>Provincia</h2>
-    <input name="provincia" type="text" />
+    <?php
+    $meses[] = [];
+    $string = file_get_contents("./archivo2.txt");
+    $array = explode("\n",$string);
+    foreach ($array as $fila){
+        $item = explode(" ",$fila);
+
+        ?>
+        <select name="provincias"> <?php
+            for ( $i = 1; $i < 48; $i++ ) {
+                $meses += [ $i => $item[$i] ];
+
+
+                if ($i % 2) {
+                    ?>
+                    <option value="value1"><?php echo $item[$i];?> </option> <?php
+                }
+            }
+            ?> </select> <?php
+    }?>
     <h2>Codigo Postal</h2>
     <input name="postal" type="text" />
     <h2>Telefono</h2>
@@ -140,26 +159,7 @@ if (isset($_GET['Enviar'])) {
     <input name="validacionWeb" type="url" />
 
         <br>
-<?php
-$meses[] = [];
-$string = file_get_contents("./archivo2.txt");
-$array = explode("\n",$string);
-foreach ($array as $fila){
-    $item = explode(" ",$fila);
 
-    ?>
-    <select name="provincias"> <?php
-    for ( $i = 1; $i < 48; $i++ ) {
-        $meses += [ $i => $item[$i] ];
-
-
-        if ($i % 2) {
-            ?>
-            <option value="value1"><?php echo $item[$i];?> </option> <?php
-        }
-    }
-        ?> </select> <?php
-}?>
     <input type="submit" name="Enviar" />
 
 </form>
