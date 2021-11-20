@@ -142,13 +142,15 @@ if (isset($_GET['Enviar'])) {
 
                 if ($i % 2) {
                     ?>
-                    <option value="value1"><?php echo $item[$i];?> </option>
+                    <option value="value<?php echo $i;?>"><?php echo $item[$i];?> </option>
 
                     <?php
                 }
 
             }
             ?> </select> <?php
+        $selectOption = $_POST['provincias'];
+        echo $selectOption;
     }?>
 
     <?php
