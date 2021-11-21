@@ -93,7 +93,11 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
         }else{
             $contador++;
             $g_telef=$telef;
-
+        }
+        if ($contador==6) {
+            echo 'Validacion Completada. Pulse otra vez en "Enviar"';
+        }else{
+            $contador = 0;
         }
         
 } ?>
@@ -103,7 +107,7 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
         <span class="step"></span>
         <span class="step"></span>
     </div>
-    <form method="get" action="<?php if ($contador<5) {?>
+    <form method="get" action="<?php if ($contador<6) {  ?>
         indexCambiado.php <?php }
         else{ ?>
             parte2.php <?php
@@ -111,7 +115,6 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
         <!-- PRIMERA PARTE -->
         <label>Nombre
         <input name="nombre" type="text" placeholder="Escribe tu nombre..." value="<?php echo $g_nombre ?>"/></label>
-
         <label>Apellidos 
         <input name="apellido" type="text" placeholder="Primero y segundo..." value="<?php echo $apelli ?>"/></label>
         <label>Teléfono 
