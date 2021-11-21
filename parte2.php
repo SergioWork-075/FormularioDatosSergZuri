@@ -17,7 +17,22 @@ $letrasCiu = preg_match('@[^A-Za-zzáéíóúñüç]@', $ciudad);
 /////COMPROBACION QUE NO ESCRIBA LETRAS////
 $postal = filter_input(INPUT_GET, 'postal', FILTER_SANITIZE_STRING);
 $numerosPos = preg_match('@[^0-9]@', $postal);
-if (isset($_GET['Siguiente'])) {
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Acceso</title>
+    <LINK REL=StyleSheet HREF="estilo/style.css" TYPE="text/css" MEDIA=screen>
+</head>
+<body>
+    <div class="formulario">
+    <h1>Formulario de Acceso</h1>
+    <?php
+    if (isset($_GET['Siguiente'])) {
     /////COMPROBACION LONGITUD////
     if(strlen($ciudad)<4){
         echo "CIUDAD:Tiene que contener al menos 4 caracteres<br/>";
@@ -35,23 +50,18 @@ if (isset($_GET['Siguiente'])) {
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Acceso</title>
-</head>
-<body>
-    <h1>Formulario de Acceso</h1>
+    <div style="text-align:center;margin-top:40px;margin-bottom:40px">
+        <span class="step"></span>
+        <span class="active"></span>
+        <span class="step"></span>
+    </div>
     <form method="get" action="index.php">
     <!-- SEGUNDA PARTE -->
-    <h2>Direccion</h2>
-    <input name="direccion" type="text" />
-    <h2>Ciudad</h2>
-    <input name="ciudad" type="text" />
-    <h2>Provincia</h2>
+    <label>Direccion
+    <input name="direccion" type="text" placeholder="Escriba su calle..."/></label>
+    <label>Ciudad
+    <input name="ciudad" type="text" placeholder="Escriba su ciudad..."/></label>
+    <label>Provincia
     <?php
     $meses[] = [];
     $string = file_get_contents("./archivo2.txt");
@@ -100,10 +110,12 @@ if (isset($_GET['Siguiente'])) {
 
             }
             ?> </select> <?php
-    }?>
-    <h2>Codigo Postal</h2>
-    <input name="postal" type="text" />
-    <input type="submit" name="Siguiente" />
+    }?></label>
+    <label>Codigo postal
+    <input name="postal" type="text" placeholder="Escriba el CP..."/></label>
+    <br>
+    <input class="boton" type="submit" name="Siguiente" />
     </form>
+</div>
 </body>
 </html>

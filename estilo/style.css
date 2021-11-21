@@ -1,20 +1,48 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
-    margin-left: 200px;
-    margin-right: 200px;
+    margin-left: 700px;
+    margin-right: 700px;
+    margin-top: 120px;
     text-align: center;
+    color: #fff;
+    background: rgb(0,56,32);
+    background: linear-gradient(90deg, rgba(0,56,32,1) 0%, rgba(0,15,69,1) 100%);
 }
-/* Hide all steps by default: */
-.tab {
-    display: none;
-  }
-  
+h1,h2{
+    color: #00FFA1;
+}
+label{
+    color: #00FFA1;
+    font-size: 20px;
+    padding-right: 50px;
+    
+    font-weight:bold;
+}
+.formulario{
+    padding: 30px;
+    background-color: #000000;
+    border-color:white;
+  border-width: 1px;
+  border-style: inset;
+    border-width: 5px;
+    border-radius: 5%;
+}
+.boton{
+    border-radius: 10%;
+    color: white;
+    background-color: #F72E5A;
+}
+input{
+    margin-bottom: 50px;
+    background-color: rgb(255, 255, 255);
+    font-size: 20px;
+}
   /* Make circles that indicate the steps of the form: */
   .step {
     height: 15px;
     width: 15px;
     margin: 0 2px;
-    background-color: #ffaaff;
+    background-color: #F72E5A;
     border: none;
     border-radius: 50%;
     display: inline-block;
@@ -22,7 +50,15 @@ body{
   }
   
   /* Mark the active step: */
-  .step.active {
+  .active {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #F72E5A;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
     opacity: 1;
   }
   

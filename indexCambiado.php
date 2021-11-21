@@ -5,6 +5,7 @@
 /////COMPROBACION QUE NO ESCRIBA NUMEROS////
 $nombre = filter_input(INPUT_GET, 'nombre', FILTER_SANITIZE_STRING);
 $apelli = filter_input(INPUT_GET, 'apellido', FILTER_SANITIZE_STRING);
+$nombre = str_replace(' ', '', $nombre);
 $letrasNom = preg_match('@[^A-Za-záéíóúñüç]@', $nombre);
 $apelli = str_replace(' ', '', $apelli);
 $letrasApe = preg_match('@[^A-Za-zzáéíóúñüç]@', $apelli);
@@ -30,6 +31,7 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
 </head>
 
 <body>
+    <div class="formulario">
     <h1>Formulario de Acceso</h1>
     <?php
     if (isset($_GET['Siguiente'])) {
@@ -70,8 +72,8 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
         
 } ?>
     <!-- Circles which indicates the steps of the form: -->
-    <div style="text-align:center;margin-top:40px;">
-        <span class="step"></span>
+    <div style="text-align:center;margin-top:40px;margin-bottom:40px">
+        <span class="active"></span>
         <span class="step"></span>
         <span class="step"></span>
     </div>
@@ -81,15 +83,15 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
             parte2.php <?php
         }?>">
         <!-- PRIMERA PARTE -->
-        <h2>Nombre</h2>
-        <input name="nombre" type="text" />
-        <h2>Apellidos</h2>
-        <input name="apellido" type="text" />
-        <h2>Telefono</h2>
-        <input name="telef" type="tel" />
-        <br /><br />
-        <input type="submit" name="Siguiente" />
+        <label>Nombre 
+        <input name="nombre" type="text" placeholder="Escribe tu nombre..."/></label>
+        <label>Apellidos 
+        <input name="apellido" type="text" placeholder="Primero y segundo..."/></label>
+        <label>Teléfono 
+        <input name="telef" type="tel" placeholder="Teléfono móvil..."/></label>
+        <input class="boton" type="submit" name="Siguiente" />
     </form>
+    </div>
 </body>
 
 </html>

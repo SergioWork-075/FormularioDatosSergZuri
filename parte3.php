@@ -46,10 +46,17 @@ if (isset($_GET['Siguiente'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <LINK REL=StyleSheet HREF="estilo/style.css" TYPE="text/css" MEDIA=screen>
 </head>Formulario de Acceso
 
 <body>
+<div class="formulario">
     <h1>Formulario de Acceso</h1>
+    <div style="text-align:center;margin-top:40px;margin-bottom:40px">
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="active"></span>
+    </div>
     <form method="get" action="parte3.php">
     <!-- TERCERA PARTE -->
     <h2>Correo</h2>
@@ -60,7 +67,9 @@ if (isset($_GET['Siguiente'])) {
     <input name="validacionWeb" type="text" />
     <br>
     <input type="submit" name="Enviar" />
+    <br /><br />
     </form>
+    </div>
 </body>
 
 </html>
