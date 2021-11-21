@@ -43,35 +43,53 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
     /////COMPROBACION LONGITUD////
     if(strlen($ciudad)<4){
         echo "CIUDAD:Tiene que contener al menos 4 caracteres<br/>";
+        $ciudad="";
+        $g_ciudad="";
     }else{
         $contador2++;
+        $g_ciudad=$ciudad;
     }
     if(strlen($direccion)<4){
         echo "DIRECCION:Tiene que contener al menos 4 caracteres<br/>";
+        $direccion="";
+        $g_direccion="";
     }else{
         $contador2++;
+        $g_direccion=$direccion;
     }
     if(strlen($postal)!==5){
         echo "POSTAL:Tiene que contener 5 numeros<br/>";
+        $postal="";
+        $g_postal="";
     }else{
         $contador2++;
+        $g_postal=$postal;
     }
     /////COMPROBACION QUE NO ESCRIBA NUMEROS////
     if ($letrasDir) {
         echo "Direccion:Has introducido algun caracter que no es una letra<br/>";
+        $direccion="";
+        $g_direccion="";
     }else{
         $contador2++;
+        $g_direccion=$direccion;
     }
     if ($letrasCiu) {
         echo "CIUDAD:Has introducido algun caracter que no es una letra<br/>";
+        $ciudad="";
+        $g_ciudad="";
     }else{
         $contador2++;
+        $g_ciudad=$ciudad;
     }
     /////COMPROBACION QUE NO ESCRIBA LETRAS////
     if ($numerosPos) {
         echo "POSTAL:Has introducido algun caracter que no es un numero<br/>";
+        $postal="";
+        $g_postal="";
     }else{
         $contador2++;
+        $g_postal=$postal;
     }
 
     //MENSAJE PARA FINALIZAR
