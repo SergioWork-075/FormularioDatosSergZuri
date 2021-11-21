@@ -105,8 +105,6 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
         $item = explode(" ", $fila);
 
         ?>
-        <form action="#" method="get">
-
             <select name="provincias"> <?php
                 for ($i = 1; $i < 104; $i++) {
                     $meses += [$i => $item[$i]];
@@ -119,12 +117,10 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
                     }
                 }
                 ?> </select>
-            <input type="submit" name="submit" value="Ver"/>
-
-        </form> <?php
+ <?php
     }
     ?><?php
-    if (isset($_GET['submit'])) {
+    if (isset($_GET['Siguiente'])) {
         $codigo_prov = $_GET['provincias'];
 
         $info[] = [];
