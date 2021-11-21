@@ -1,5 +1,6 @@
 <?php 
     /////LEER EL TXT////
+    error_reporting(E_ERROR | E_PARSE);
     $meses = [];
     $string = file_get_contents("archivo.txt");
     $array = explode("\n",$string);
@@ -11,11 +12,13 @@
         ];
 }
 /////COMPROBACION QUE NO ESCRIBA NUMEROS////
-$provincia2 = "";
+$provincia2 = " ";
+$provincia2 = filter_input(INPUT_GET, 'provincia2', FILTER_SANITIZE_STRING);
 $ciudad = filter_input(INPUT_GET, 'ciudad', FILTER_SANITIZE_STRING);
 $direccion = filter_input(INPUT_GET, 'direccion', FILTER_SANITIZE_STRING);
-$letrasCiu = preg_match('@[^A-Za-zzáéíóúñüç]@', $ciudad);
-$letrasDir = preg_match('@[^A-Za-zzáéíóúñüç]@', $direccion);
+$letrasCiu = preg_match('@[^A-Za-záéíóúñüçÁÉÍÓÚÑÜÇ ]@', $ciudad);
+$letrasPro = preg_match('@[^A-Za-záéíóúñüçÁÉÍÓÚÑÜÇ ]@', $provincia2);
+$letrasDir = preg_match('@[^A-Za-záéíóúñüçÁÉÍÓÚÑÜÇ ]@', $direccion);
 $contador2 = 0;
 
 /////COMPROBACION QUE NO ESCRIBA LETRAS////
@@ -88,7 +91,11 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
         <span class="active"></span>
         <span class="step"></span>
     </div>
-    <form method="get" action="parte2.php">
+    <form method="get" action="<?php if ($contador<6) {  ?>
+        parte2.php <?php }
+        else{ ?>
+            parte3.php <?php
+        }?>">
     
     <!-- SEGUNDA PARTE -->
     <label>Direccion

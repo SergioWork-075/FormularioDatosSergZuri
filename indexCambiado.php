@@ -9,12 +9,10 @@ $g_telef ="";
 
 /////COMPROBACION QUE NO ESCRIBA NUMEROS////
 $nombre = filter_input(INPUT_GET, 'nombre', FILTER_SANITIZE_STRING);
-
 $apelli = filter_input(INPUT_GET, 'apellido', FILTER_SANITIZE_STRING);
-$nombre = str_replace(' ', '', $nombre);
-$letrasNom = preg_match('@[^A-Za-záéíóúñüçÁÉÍÓÚÑÜÇ]@', $nombre);
-$apelli = str_replace(' ', '', $apelli);
-$letrasApe = preg_match('@[^A-Za-zzáéíóúñüç]@', $apelli);
+
+$letrasNom = preg_match('@[^A-Za-záéíóúñüçÁÉÍÓÚÑÜÇ ]@', $nombre);
+$letrasApe = preg_match('@[^A-Za-zzáéíóúñüçÁÉÍÓÚÑÜÇ ]@', $apelli);
 $enviarSiNo = false;
 $contador = 0;
 
