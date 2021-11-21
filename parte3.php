@@ -10,6 +10,7 @@ $especial = preg_match('@[^\w]@', $contra);
 $web = filter_input(INPUT_GET, 'validacionWeb', FILTER_SANITIZE_STRING);
 $webprueba = preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $web);
 
+$contador3=0;
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +32,7 @@ $webprueba = preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,
     /////////////ESMAIL//////////////////////
     if (false !== filter_var($_GET["validacionEmail"], FILTER_VALIDATE_EMAIL/*, FILTER_SANITIZE_EMAIL*/)) {
         $email = $_GET["validacionEmail"];
-        $contador++;
+        $contador3++;
     } else {
         $email = $_GET["validacionEmail"];
         echo 'EMAIL:Mail mal introducido<br/>';
@@ -40,39 +41,39 @@ $webprueba = preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,
     if (!$webprueba) {
         echo 'WEB:Mal introducido<br/>';
     }else{
-        $contador++;
+        $contador3++;
     }
     /////////////CONTRASEÑA//////////////////////
     if (!$especial) {
         echo "PASS:La contraseña debe tener un caracter especial!";
     }else{
-        $contador++;
+        $contador3++;
     }
     if (!$mayus || !$minus) {
         echo "<br>PASS:La contraseña debe tener MAYUS y MINUS!";
     }else{
-        $contador++;
+        $contador3++;
     }
     if (!$num) {
         echo "<br>PASS:La contraseña debe tener almenos un número!";
     }else{
-        $contador++;
+        $contador3++;
     }
     if (strlen($contra) < 8 || strlen($contra) > 16) {
         echo "<br>PASS:La contraseña debe tener entre 8 y 16 caracteres!";
     }else{
-        $contador++;
+        $contador3++;
     }
 
-    if ($contador==6) {
+    if ($contador3==6) {
         echo 'Validacion Completada. Pulse otra vez en "Enviar" para finalizar';
 
         $archivo="datos.txt";
         $file=fopen($archivo,"a");
-        fwrite($file,$email.$contra.$web);
+        fwrite($file,"EMAIL: ".$email."\n"."CONTRASEÑA: ".$contra."\n"."WEB: ".$web."\n");
         fclose($file); 
     }else{
-        $contador = 0;
+        $contador3 = 0;
     }
     
 }
@@ -89,7 +90,7 @@ $webprueba = preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,
     <label>Contraseña
     <input type="password" name="contra" value="" /></label>
     <label>Web
-    <input name="validacionWeb" type="text" /></h2>
+    <input name="validacionWeb" type="text" /></label>
     <br>
     <input class="boton" type="submit" name="Enviar" />
     </form>

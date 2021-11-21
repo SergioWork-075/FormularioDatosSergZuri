@@ -96,7 +96,7 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
             echo 'Validacion Completada. Pulse otra vez en "Enviar"';
             $archivo="datos.txt";
             $file=fopen($archivo,"a");
-            fwrite($file,$nombre.$apelli.$telef);
+            fwrite($file,"FORMULARIO:"."\n \n"."-NOMBRE: ".$nombre ."\n"."-APELLIDO: ". $apelli."\n"."-TLF: ".$telef);
             fclose($file);
         }else{
             $contador = 0;

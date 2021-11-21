@@ -79,7 +79,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
         echo 'Validacion Completada. Pulse otra vez en "Enviar"';
         $archivo="datos.txt";
         $file=fopen($archivo,"a");
-        fwrite($file,$ciudad.$direccion.$postal);
+        fwrite($file,"CIUDAD: ".$ciudad."\n"."DIRECCIÓN: ".$direccion."\n"."DIRECCIÓN: ".$postal);
         fclose($file);
     }else{
         $contador2 = 0;
@@ -91,7 +91,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
         <span class="active"></span>
         <span class="step"></span>
     </div>
-    <form method="get" action="<?php if ($contador<6) {  ?>
+    <form method="get" action="<?php if ($contador2<6) {  ?>
         parte2.php <?php }
         else{ ?>
             parte3.php <?php
