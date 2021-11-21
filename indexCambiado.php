@@ -1,12 +1,18 @@
 <?php
-
+session_start();
 //print_r($meses);
+
+////DECLARO LAS VARIABLES DONDE GUARDO LOS VALUES DE LOS INPUT SIEMPRE QUE ESTEN CORRECTOS
+$g_nombre ="";
+$g_apelli ="";
+$g_telef ="";
 
 /////COMPROBACION QUE NO ESCRIBA NUMEROS////
 $nombre = filter_input(INPUT_GET, 'nombre', FILTER_SANITIZE_STRING);
+
 $apelli = filter_input(INPUT_GET, 'apellido', FILTER_SANITIZE_STRING);
 $nombre = str_replace(' ', '', $nombre);
-$letrasNom = preg_match('@[^A-Za-záéíóúñüç]@', $nombre);
+$letrasNom = preg_match('@[^A-Za-záéíóúñüçÁÉÍÓÚÑÜÇ]@', $nombre);
 $apelli = str_replace(' ', '', $apelli);
 $letrasApe = preg_match('@[^A-Za-zzáéíóúñüç]@', $apelli);
 $enviarSiNo = false;
@@ -39,35 +45,55 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
         /////COMPROBACION LONGITUD////
         if (strlen($nombre) < 2) {
             echo "NOMBRE:Tiene que contener al menos 2 caracteres<br/>";
+            $nombre="";
+            $g_nombre="";
         }else{
             $contador++;
+            $g_nombre=$nombre;
         }
         if (strlen($apelli) < 4) {
             echo "APELLIDOS:Tiene que contener al menos 4 caracteres<br/>";
+            $apelli ="";
+            $g_apelli ="";
         }else{
             $contador++;
+            $g_apelli=$apelli;
         }
         if (strlen($telef) != 9) {
             echo "TELEFONO:No puede incluir mas de 9 numeros, y tampoco menos<br/>";
+            $telef ="";
+            $g_telef ="";
         }else{
             $contador++;
+            $g_telef=$telef;
         }
         /////COMPROBACION QUE NO ESCRIBA NUMEROS////
         if ($letrasNom) {
             echo "NOMBRE:Has introducido algun caracter que no es una letra<br/>";
+            $nombre="";
+            $g_nombre="";
+
         }else{
             $contador++;
+            $g_nombre=$nombre;
         }
-        if ( $letrasApe) {
+        if ($letrasApe) {
             echo "APELLIDO:Has introducido algun caracter que no es una letra<br/>";
+            $apelli="";
+            $g_apelli="";
         }else{
             $contador++;
+            $g_apelli=$apelli;
         }
         /////COMPROBACION QUE NO ESCRIBA LETRAS////
         if ($numerosTlf) {
             echo "TELEFONO:Has introducido algun caracter que no es un numero<br/>";
+            $telef="";
+            $g_telef="";
         }else{
             $contador++;
+            $g_telef=$telef;
+
         }
         
 } ?>
@@ -78,17 +104,18 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
         <span class="step"></span>
     </div>
     <form method="get" action="<?php if ($contador<5) {?>
-        index.php <?php } 
+        indexCambiado.php <?php }
         else{ ?>
             parte2.php <?php
         }?>">
         <!-- PRIMERA PARTE -->
-        <label>Nombre 
-        <input name="nombre" type="text" placeholder="Escribe tu nombre..."/></label>
+        <label>Nombre
+        <input name="nombre" type="text" placeholder="Escribe tu nombre..." value="<?php echo $g_nombre ?>"/></label>
+
         <label>Apellidos 
-        <input name="apellido" type="text" placeholder="Primero y segundo..."/></label>
+        <input name="apellido" type="text" placeholder="Primero y segundo..." value="<?php echo $apelli ?>"/></label>
         <label>Teléfono 
-        <input name="telef" type="tel" placeholder="Teléfono móvil..."/></label>
+        <input name="telef" type="tel" placeholder="Teléfono móvil..." value="<?php echo $telef ?>"/></label>
         <input class="boton" type="submit" name="Siguiente" />
     </form>
     </div>
