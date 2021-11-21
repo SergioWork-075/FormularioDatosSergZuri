@@ -13,6 +13,7 @@
 /////COMPROBACION QUE NO ESCRIBA NUMEROS////
 $ciudad = filter_input(INPUT_GET, 'ciudad', FILTER_SANITIZE_STRING);
 $letrasCiu = preg_match('@[^A-Za-zzáéíóúñüç]@', $ciudad);
+$contador2 = 0;
 
 /////COMPROBACION QUE NO ESCRIBA LETRAS////
 $postal = filter_input(INPUT_GET, 'postal', FILTER_SANITIZE_STRING);
@@ -36,17 +37,32 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
     /////COMPROBACION LONGITUD////
     if(strlen($ciudad)<4){
         echo "CIUDAD:Tiene que contener al menos 4 caracteres<br/>";
+    }else{
+        $contador2++;
     }
     if(strlen($postal)>5){
         echo "POSTAL:No puede incluir mas de 5 numeros<br/>";
+    }else{
+        $contador2++;
     }
     /////COMPROBACION QUE NO ESCRIBA NUMEROS////
     if ($letrasCiu) {
         echo "CIUDAD:Has introducido algun caracter que no es una letra<br/>";
+    }else{
+        $contador2++;
     }
     /////COMPROBACION QUE NO ESCRIBA LETRAS////
     if ($numerosPos) {
         echo "POSTAL:Has introducido algun caracter que no es un numero<br/>";
+    }else{
+        $contador2++;
+    }
+
+    //MENSAJE PARA FINALIZAR
+    if ($contador2==4) {
+        echo 'Validacion Completada. Pulse otra vez en "Enviar"';
+    }else{
+        $contador2 = 0;
     }
 }
 ?>
@@ -55,14 +71,20 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
         <span class="active"></span>
         <span class="step"></span>
     </div>
-    <form method="get" action="index.php">
+    <form method="get" action="<?php if ($contador2<4) {  ?>
+        parte2.php <?php }
+        else{ ?>
+            parte3.php <?php
+        }?>">
+    
     <!-- SEGUNDA PARTE -->
     <label>Direccion
     <input name="direccion" type="text" placeholder="Escriba su calle..."/></label>
     <label>Ciudad
-    <input name="ciudad" type="text" placeholder="Escriba su ciudad..."/></label>
-    <label>Provincia
+    <input name="ciudad" type="text" placeholder="Escriba su ciudad..."/></label><br>
+    <!--<label>Provincia
     <?php
+    /*
     $meses[] = [];
     $string = file_get_contents("./archivo2.txt");
     $array = explode("\n",$string);
@@ -110,8 +132,8 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
 
             }
             ?> </select> <?php
-    }?></label>
-    <label>Codigo postal
+    }*/?></label>-->
+    <label>Codig. Postal
     <input name="postal" type="text" placeholder="Escriba el CP..."/></label>
     <br>
     <input class="boton" type="submit" name="Siguiente" />
