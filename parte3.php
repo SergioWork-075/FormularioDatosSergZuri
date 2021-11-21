@@ -31,6 +31,7 @@ $webprueba = preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,
     /////////////ESMAIL//////////////////////
     if (false !== filter_var($_GET["validacionEmail"], FILTER_VALIDATE_EMAIL/*, FILTER_SANITIZE_EMAIL*/)) {
         $email = $_GET["validacionEmail"];
+        $contador++;
     } else {
         $email = $_GET["validacionEmail"];
         echo 'EMAIL:Mail mal introducido<br/>';
@@ -38,20 +39,42 @@ $webprueba = preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,
     /////////////WEB//////////////////////
     if (!$webprueba) {
         echo 'WEB:Mal introducido<br/>';
+    }else{
+        $contador++;
     }
     /////////////CONTRASEÑA//////////////////////
     if (!$especial) {
         echo "PASS:La contraseña debe tener un caracter especial!";
+    }else{
+        $contador++;
     }
     if (!$mayus || !$minus) {
         echo "<br>PASS:La contraseña debe tener MAYUS y MINUS!";
+    }else{
+        $contador++;
     }
     if (!$num) {
         echo "<br>PASS:La contraseña debe tener almenos un número!";
+    }else{
+        $contador++;
     }
     if (strlen($contra) < 8 || strlen($contra) > 16) {
         echo "<br>PASS:La contraseña debe tener entre 8 y 16 caracteres!";
+    }else{
+        $contador++;
     }
+
+    if ($contador==6) {
+        echo 'Validacion Completada. Pulse otra vez en "Enviar" para finalizar';
+
+        $archivo="datos.txt";
+        $file=fopen($archivo,"a");
+        fwrite($file,$email.$contra.$web);
+        fclose($file); 
+    }else{
+        $contador = 0;
+    }
+    
 }
 ?>
     <div style="text-align:center;margin-top:40px;margin-bottom:40px">

@@ -11,6 +11,7 @@
         ];
 }
 /////COMPROBACION QUE NO ESCRIBA NUMEROS////
+$provincia2 = "";
 $ciudad = filter_input(INPUT_GET, 'ciudad', FILTER_SANITIZE_STRING);
 $direccion = filter_input(INPUT_GET, 'direccion', FILTER_SANITIZE_STRING);
 $letrasCiu = preg_match('@[^A-Za-zzáéíóúñüç]@', $ciudad);
@@ -73,6 +74,10 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
     //MENSAJE PARA FINALIZAR
     if ($contador2==6) {
         echo 'Validacion Completada. Pulse otra vez en "Enviar"';
+        $archivo="datos.txt";
+        $file=fopen($archivo,"a");
+        fwrite($file,$ciudad.$direccion.$postal);
+        fclose($file);
     }else{
         $contador2 = 0;
     }
@@ -102,7 +107,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
         ?>
         <form action="#" method="get">
 
-        <select name='provincias' onchange='this.form.submit()'> <?php
+            <select name="provincias"> <?php
                 for ($i = 1; $i < 104; $i++) {
                     $meses += [$i => $item[$i]];
                     if ($i % 2) {
@@ -114,8 +119,9 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
                     }
                 }
                 ?> </select>
-            <noscript><input type="submit" name="submit" value="Ver"></noscript>
-     <?php
+            <input type="submit" name="submit" value="Ver"/>
+
+        </form> <?php
     }
     ?><?php
     if (isset($_GET['submit'])) {

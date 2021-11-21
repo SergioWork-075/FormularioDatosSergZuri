@@ -96,6 +96,10 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
         }
         if ($contador==6) {
             echo 'Validacion Completada. Pulse otra vez en "Enviar"';
+            $archivo="datos.txt";
+            $file=fopen($archivo,"a");
+            fwrite($file,$nombre.$apelli.$telef);
+            fclose($file);
         }else{
             $contador = 0;
         }
