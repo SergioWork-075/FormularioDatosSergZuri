@@ -12,7 +12,9 @@
 }
 /////COMPROBACION QUE NO ESCRIBA NUMEROS////
 $ciudad = filter_input(INPUT_GET, 'ciudad', FILTER_SANITIZE_STRING);
+$direccion = filter_input(INPUT_GET, 'direccion', FILTER_SANITIZE_STRING);
 $letrasCiu = preg_match('@[^A-Za-zzáéíóúñüç]@', $ciudad);
+$letrasDir = preg_match('@[^A-Za-zzáéíóúñüç]@', $direccion);
 $contador2 = 0;
 
 /////COMPROBACION QUE NO ESCRIBA LETRAS////
@@ -40,12 +42,22 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
     }else{
         $contador2++;
     }
-    if(strlen($postal)>5){
-        echo "POSTAL:No puede incluir mas de 5 numeros<br/>";
+    if(strlen($direccion)<4){
+        echo "DIRECCION:Tiene que contener al menos 4 caracteres<br/>";
+    }else{
+        $contador2++;
+    }
+    if(strlen($postal)!==5){
+        echo "POSTAL:Tiene que contener 5 numeros<br/>";
     }else{
         $contador2++;
     }
     /////COMPROBACION QUE NO ESCRIBA NUMEROS////
+    if ($letrasDir) {
+        echo "Direccion:Has introducido algun caracter que no es una letra<br/>";
+    }else{
+        $contador2++;
+    }
     if ($letrasCiu) {
         echo "CIUDAD:Has introducido algun caracter que no es una letra<br/>";
     }else{
@@ -59,7 +71,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
     }
 
     //MENSAJE PARA FINALIZAR
-    if ($contador2==4) {
+    if ($contador2==6) {
         echo 'Validacion Completada. Pulse otra vez en "Enviar"';
     }else{
         $contador2 = 0;
@@ -71,70 +83,63 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
         <span class="active"></span>
         <span class="step"></span>
     </div>
-    <form method="get" action="<?php if ($contador2<4) {  ?>
-        parte2.php <?php }
-        else{ ?>
-            parte3.php <?php
-        }?>">
+    <form method="get" action="parte2.php">
     
     <!-- SEGUNDA PARTE -->
     <label>Direccion
     <input name="direccion" type="text" placeholder="Escriba su calle..."/></label>
     <label>Ciudad
     <input name="ciudad" type="text" placeholder="Escriba su ciudad..."/></label><br>
-    <!--<label>Provincia
-    <?php
-    /*
-    $meses[] = [];
-    $string = file_get_contents("./archivo2.txt");
-    $array = explode("\n",$string);
-    foreach ($array as $fila){
-        $item = explode(" ",$fila);
-
-        ?>
-        <select name="provincias"> <?php
-            for ( $i = 1; $i < 48; $i++ ) {
-                $meses += [ $i => $item[$i] ];
-
-
-                if ($i % 2) {
-                    ?>
-                    <option value="value<?php echo $i;?>"><?php echo $item[$i];?> </option>
-
-                    <?php
-                }
-
-            }
-            ?> </select> <?php
-        $selectOption = $_POST['provincias'];
-        echo $selectOption;
-    }?>
-
+    <label>Provincia</label>
     <?php
     $meses[] = [];
     $string = file_get_contents("./archivo2.txt");
-    $array = explode("\n",$string);
-    foreach ($array as $fila){
-        $item = explode(" ",$fila);
+    $array = explode("\n", $string);
+
+    foreach ($array as $fila) {
+        $item = explode(" ", $fila);
 
         ?>
-        <select name="provincias"> <?php
-            for ( $i = 1; $i < 48; $i++ ) {
-                $meses += [ $i => $item[$i] ];
+        <form action="#" method="get">
 
+        <select name='provincias' onchange='this.form.submit()'> <?php
+                for ($i = 1; $i < 104; $i++) {
+                    $meses += [$i => $item[$i]];
+                    if ($i % 2) {
+                        $_SESSION['provincia'] = $item[$i]; ?>
 
+                        <option value="<?php echo $item[$i - 1] . " " . $item[$i]; ?>"><?php echo $_SESSION['provincia']; ?></option>
+
+                        <?php
+                    }
+                }
+                ?> </select>
+            <noscript><input type="submit" name="submit" value="Ver"></noscript>
+     <?php
+    }
+    ?><?php
+    if (isset($_GET['submit'])) {
+        $codigo_prov = $_GET['provincias'];
+
+        $info[] = [];
+        $array2 = explode("\n", $codigo_prov);
+        foreach ($array2 as $selec) {
+            $valor = explode(" ", $selec);
+
+            for ($i = 0; $i < 2; $i++) {
+                $info += [$i => $valor[$i]];
                 if ($i % 2) {
-                    ?>
-                    <option value="value1"><?php echo $item[$i+1];?> </option>
-
-                    <?php
+                    $provincia2 = $valor[$i];
+                } else {
+                    $postal = $valor[$i];
                 }
 
             }
-            ?> </select> <?php
-    }*/?></label>-->
-    <label>Codig. Postal
-    <input name="postal" type="text" placeholder="Escriba el CP..."/></label>
+        }
+    } ?><br>
+    <input name="provincias2" readonly type="text" value="<?php echo $provincia2; ?>"/><br>
+    <h2>Código postal</h2>
+    <input name="postal" type="text" value="<?php echo $postal; ?>"/>
     <br>
     <input class="boton" type="submit" name="Siguiente" />
     </form>
