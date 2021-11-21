@@ -1,3 +1,4 @@
+
 <?php
 /////LEER EL TXT////
 $meses = [];
@@ -131,53 +132,43 @@ if (isset($_GET['Enviar'])) {
     $meses[] = [];
     $string = file_get_contents("./archivo2.txt");
     $array = explode("\n",$string);
+
+    $entry_order_type ="Selecte order type from the list and press the submit button";
+
+    if(isset($_POST['provincias'])){
+        $entry_order_type = $_GET['provincias'];
+    }
+
+
     foreach ($array as $fila){
         $item = explode(" ",$fila);
 
         ?>
-        <select name="provincias"> <?php
-            for ( $i = 1; $i < 48; $i++ ) {
-                $meses += [ $i => $item[$i] ];
+        <form action="#" method="get">
 
+            <select name="provincias"> <?php
+                for ( $i = 1; $i < 104; $i++ ) {
+                    $meses += [ $i => $item[$i] ];
+                    if ($i % 2) {
+                        $_SESSION['provincia'] = $item[$i] . $_GET['provincias']; ?>
+                        <option value="<?php echo $item[$i-1] . $item[$i];?>"><?php echo $_SESSION['provincia'];?></option>
 
-                if ($i % 2) {
-                    ?>
-                    <option value="value<?php echo $i;?>"><?php echo $item[$i];?> </option>
-
-                    <?php
+                        <?php
+                    }
                 }
+                ?> </select>
+            <input type="submit" name="submit" value="Ver" />
 
-            }
-            ?> </select> <?php
-        $selectOption = $_POST['provincias'];
-        echo $selectOption;
-    }?>
-
-    <?php
-    $meses[] = [];
-    $string = file_get_contents("./archivo2.txt");
-    $array = explode("\n",$string);
-    foreach ($array as $fila){
-        $item = explode(" ",$fila);
-
-        ?>
-        <select name="provincias"> <?php
-            for ( $i = 1; $i < 48; $i++ ) {
-                $meses += [ $i => $item[$i] ];
+        </form> <?php
+    }
+    ?><h2>Código postal</h2><?php
+    if (isset($_GET['submit'])) {
+        $codigo_prov = $_GET['provincias'];
+    ?><input name="postal" type="text" value="<?php echo $codigo_prov;?>"/><?php
+    }else{?><input name="postal" type="text" value=""/><?php }
+    ?>
 
 
-                if ($i % 2) {
-                    ?>
-                    <option value="value1"><?php echo $item[$i+1];?> </option>
-
-                    <?php
-                }
-
-            }
-            ?> </select> <?php
-    }?>
-    <h2>Codigo Postal</h2>
-    <input name="postal" type="text" />
     <h2>Telefono</h2>
     <input name="telef" type="tel" />
     <h2>Correo</h2>
