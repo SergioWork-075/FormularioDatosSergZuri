@@ -100,7 +100,11 @@ $contador3=0;
         <span class="step"></span>
         <span class="active"></span>
     </div>
-    <form method="get" action="parte3.php">
+    <form method="get" action="<?php if ($contador3<6) {  ?>
+        parte3.php <?php }
+    else{ ?>
+            final.php <?php
+    }?>">
     <!-- TERCERA PARTE -->
     <label>Correo
     <input name="validacionEmail" type="text" placeholder="Escriba su email..." value="<?php echo $email; ?>"/></label><br>

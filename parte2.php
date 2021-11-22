@@ -98,7 +98,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
         echo 'Validacion Completada. Pulse otra vez en <a>"Enviar"</a>';
         $archivo="datos.txt";
         $file=fopen($archivo,"a");
-        fwrite($file,"CIUDAD: ".$ciudad."\n"."DIRECCIÓN: ".$direccion."\n"."DIRECCIÓN: ".$postal);
+        fwrite($file,"CIUDAD: ".$ciudad."\n"."DIRECCIÓN: ".$direccion."\n"."CP: ".$postal);
         fclose($file);
     }else{
         $contador2 = 0;
