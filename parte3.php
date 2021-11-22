@@ -21,7 +21,7 @@ $contador3=0;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Formulario de Acceso</title>
     <LINK REL=StyleSheet HREF="estilo/style.css" TYPE="text/css" MEDIA=screen>
 </head>
 
@@ -103,7 +103,7 @@ $contador3=0;
     <form method="get" action="parte3.php">
     <!-- TERCERA PARTE -->
     <label>Correo
-    <input name="validacionEmail" type="email" placeholder="Escriba su gmail..." value="<?php echo $email; ?>"/></label><br>
+    <input name="validacionEmail" type="text" placeholder="Escriba su email..." value="<?php echo $email; ?>"/></label><br>
     <label>Passw
     <input type="password" name="contra" placeholder="Que sea segura..."value="<?php echo $web; ?>" /></label><br>
     <label>Web

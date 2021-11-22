@@ -14,15 +14,15 @@ h1,h2{
 a{
   color: #ff6788;
 }
+
 .finalizado{
   position: absolute;
   font-size: 20px;
-  margin-left: 20px;
   margin-top: 50px;
   padding-top: 100px;
   text-align: center;
-  width: 600px;
-  height: 200px;
+  width: 650px;
+  height: 350px;
   background-color: black;
 }
 label{
@@ -42,13 +42,21 @@ label{
     border-radius: 5%;
 }
 .boton{
-    border-radius: 10%;
     color: white;
+    width: 25%;
     background-color: #F72E5A;
 }
 input{
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid gray;
+  outline: 0;
+  font-size: 1.3rem;
+  padding: 7px 0;
+  color: white;
+  background: transparent;
     margin-bottom: 50px;
-    background-color: rgb(255, 255, 255);
     font-size: 20px;
 }
   /* Make circles that indicate the steps of the form: */
