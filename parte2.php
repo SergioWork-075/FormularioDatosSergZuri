@@ -1,12 +1,12 @@
 <?php 
     /////LEER EL TXT////
     error_reporting(E_ERROR | E_PARSE);
-    $meses = [];
+    $cpProv = [];
     $string = file_get_contents("archivo.txt");
     $array = explode("\n",$string);
     foreach ($array as $fila){
         $item = explode(" ",$fila);
-        $meses[] = [
+        $cpProv[] = [
             'postal' => $item[0],
             'nombre' => $item[1]
         ];
@@ -43,7 +43,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
     if (isset($_GET['Siguiente'])) {
     /////COMPROBACION LONGITUD////
     if(strlen($ciudad)<4){
-        echo "<a>CIUDAD:</a>Tiene que contener al menos 4 caracteres<br/>";
+        echo "<a>CIUDAD: </a>Tiene que contener al menos 4 caracteres<br/>";
         $ciudad="";
         $g_ciudad="";
     }else{
@@ -51,7 +51,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
         $g_ciudad=$ciudad;
     }
     if(strlen($direccion)<4){
-        echo "<a>DIRECCION:</a>Tiene que contener al menos 4 caracteres<br/>";
+        echo "<a>DIRECCION: </a>Tiene que contener al menos 4 caracteres<br/>";
         $direccion="";
         $g_direccion="";
     }else{
@@ -59,7 +59,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
         $g_direccion=$direccion;
     }
     if(strlen($postal)!==5){
-        echo "<a>POSTAL:</a>Tiene que contener 5 numeros<br/>";
+        echo "<a>POSTAL: </a>Tiene que contener 5 numeros<br/>";
         $postal="";
         $g_postal="";
     }else{
@@ -68,7 +68,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
     }
     /////COMPROBACION QUE NO ESCRIBA NUMEROS////
     if ($letrasDir) {
-        echo "<a>Direccion</a>:Has introducido algun caracter que no es una letra<br/>";
+        echo "<a>Direccion: </a>Has introducido algun caracter que no es una letra<br/>";
         $direccion="";
         $g_direccion="";
     }else{
@@ -76,7 +76,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
         $g_direccion=$direccion;
     }
     if ($letrasCiu) {
-        echo "<a>CIUDAD:</a>Has introducido algun caracter que no es una letra<br/>";
+        echo "<a>CIUDAD: </a>Has introducido algun caracter que no es una letra<br/>";
         $ciudad="";
         $g_ciudad="";
     }else{
@@ -85,7 +85,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
     }
     /////COMPROBACION QUE NO ESCRIBA LETRAS////
     if ($numerosPos) {
-        echo "<a>POSTAL:</a>Has introducido algun caracter que no es un numero<br/>";
+        echo "<a>POSTAL: </a>Has introducido algun caracter que no es un numero<br/>";
         $postal="";
         $g_postal="";
     }else{
@@ -123,7 +123,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
     <input name="ciudad" type="text" placeholder="Escriba su ciudad..."/></label><br>
     <label>Provincia</label><br/>
     <?php
-    $meses[] = [];
+    $cpProv[] = [];
     $string = file_get_contents("./archivo2.txt");
     $array = explode("\n", $string);
 
@@ -133,7 +133,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
         ?>
             <select name="provincias"> <?php
                 for ($i = 1; $i < 104; $i++) {
-                    $meses += [$i => $item[$i]];
+                    $cpProv += [$i => $item[$i]];
                     if ($i % 2) {
                         $_SESSION['provincia'] = $item[$i]; ?>
 

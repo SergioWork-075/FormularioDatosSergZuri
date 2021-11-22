@@ -1,5 +1,6 @@
 <?php
 /////////////CONTRASEÑA//////////////////////
+$email = filter_input(INPUT_GET, 'validacionEmail',FILTER_VALIDATE_EMAIL);
 $contra = filter_input(INPUT_GET, 'contra', FILTER_SANITIZE_STRING);
 $mayus = preg_match('@[A-Z]@', $contra);
 $minus = preg_match('@[a-z]@', $contra);
@@ -30,38 +31,54 @@ $contador3=0;
     <?php
     if (isset($_GET['Enviar'])) {
     /////////////ESMAIL//////////////////////
-    if (false !== filter_var($_GET["validacionEmail"], FILTER_VALIDATE_EMAIL/*, FILTER_SANITIZE_EMAIL*/)) {
-        $email = $_GET["validacionEmail"];
+    if ($email) {
+        $g_email = $email;
         $contador3++;
     } else {
-        $email = $_GET["validacionEmail"];
-        echo '<a>EMAIL:Mail mal introducido<br/>';
+        $g_email = "";
+        $email  = "";
+        echo '<a>EMAIL: </a>Mail mal introducido<br/>';
     }
     /////////////WEB//////////////////////
     if (!$webprueba) {
-        echo '<a>WEB:</a>Mal introducido<br/>';
+        echo '<a>WEB: </a>Mal introducido<br/>';
+        $g_web = "";
+        $web  = "";
     }else{
+        $g_web = $web;
         $contador3++;
     }
     /////////////CONTRASEÑA//////////////////////
     if (!$especial) {
-        echo "<a>PASS:</a>La contraseña debe tener un caracter especial!<br>";
+        echo "<a>PASS: </a>La contraseña debe tener un caracter especial!<br>";
+        $g_contra = "";
+        $contra  = "";
     }else{
+        $g_contra = $contra;
         $contador3++;
     }
     if (!$mayus || !$minus) {
-        echo "<a>PASS:</a>La contraseña debe tener MAYUS y MINUS!<br>";
+        echo "<a>PASS: </a>La contraseña debe tener MAYUS y MINUS!<br>";
+        $g_contra = "";
+        $contra  = "";
     }else{
+        $g_contra = $contra;
         $contador3++;
     }
     if (!$num) {
-        echo "<a>PASS:</a>La contraseña debe tener almenos un número!<br>";
+        echo "<a>PASS: </a>La contraseña debe tener almenos un número!<br>";
+        $g_contra = "";
+        $contra  = "";
     }else{
+        $g_contra = $contra;
         $contador3++;
     }
     if (strlen($contra) < 8 || strlen($contra) > 16) {
-        echo "<a>PASS:</a>La contraseña debe tener entre 8 y 16 caracteres!<br>";
+        echo "<a>PASS: </a>La contraseña debe tener entre 8 y 16 caracteres!<br>";
+        $g_contra = "";
+        $contra  = "";
     }else{
+        $g_contra = $contra;
         $contador3++;
     }
 
@@ -86,11 +103,11 @@ $contador3=0;
     <form method="get" action="parte3.php">
     <!-- TERCERA PARTE -->
     <label>Correo
-    <input name="validacionEmail" type="email" placeholder="Escriba su gmail..."/></label><br>
+    <input name="validacionEmail" type="email" placeholder="Escriba su gmail..." value="<?php echo $email; ?>"/></label><br>
     <label>Passw
-    <input type="password" name="contra" placeholder="Que sea segura..." /></label><br>
+    <input type="password" name="contra" placeholder="Que sea segura..."value="<?php echo $web; ?>" /></label><br>
     <label>Web
-    <input name="validacionWeb" type="text" placeholder="Escriba su pagina..."/></label>
+    <input name="validacionWeb" type="text" placeholder="Escriba su pagina..." value="<?php echo $web; ?>"/></label>
     <br>
     <input class="boton" type="submit" name="Enviar"  />
     </form>

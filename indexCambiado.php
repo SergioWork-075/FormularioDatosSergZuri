@@ -40,7 +40,7 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
         $contador = 0;
         /////COMPROBACION LONGITUD////
         if (strlen($nombre) < 2) {
-            echo "<a>NOMBRE:</a>Tiene que contener al menos 2 caracteres<br/>";
+            echo "<a>NOMBRE: </a>Tiene que contener al menos 2 caracteres<br/>";
             $nombre="";
             $g_nombre="";
         }else{
@@ -48,7 +48,7 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
             $g_nombre=$nombre;
         }
         if (strlen($apelli) < 4) {
-            echo "<a>APELLIDOS:</a>Tiene que contener al menos 4 caracteres<br/>";
+            echo "<a>APELLIDOS: </a>Tiene que contener al menos 4 caracteres<br/>";
             $apelli ="";
             $g_apelli ="";
         }else{
@@ -56,7 +56,7 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
             $g_apelli=$apelli;
         }
         if (strlen($telef) != 9) {
-            echo "<a>TELEFONO:</a>No puede incluir mas de 9 numeros, y tampoco menos<br/>";
+            echo "<a>TELEFONO: </a>No puede incluir mas de 9 numeros, y tampoco menos<br/>";
             $telef ="";
             $g_telef ="";
         }else{
@@ -65,7 +65,7 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
         }
         /////COMPROBACION QUE NO ESCRIBA NUMEROS////
         if ($letrasNom) {
-            echo "<a>NOMBRE:</a>Has introducido algun caracter que no es una letra<br/>";
+            echo "<a>NOMBRE: </a>Has introducido algun caracter que no es una letra<br/>";
             $nombre="";
             $g_nombre="";
 
@@ -74,7 +74,7 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
             $g_nombre=$nombre;
         }
         if ($letrasApe) {
-            echo "<a>APELLIDO:</a>Has introducido algun caracter que no es una letra<br/>";
+            echo "<a>APELLIDO: </a>Has introducido algun caracter que no es una letra<br/>";
             $apelli="";
             $g_apelli="";
         }else{
@@ -83,7 +83,7 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
         }
         /////COMPROBACION QUE NO ESCRIBA LETRAS////
         if ($numerosTlf) {
-            echo "<a>TELEFONO:</a>Has introducido algun caracter que no es un numero<br/>";
+            echo "<a>TELEFONO: </a>Has introducido algun caracter que no es un numero<br/>";
             $telef="";
             $g_telef="";
         }else{
