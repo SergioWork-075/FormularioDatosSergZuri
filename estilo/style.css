@@ -1,7 +1,7 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
-    margin-left: 700px;
-    margin-right: 700px;
+    margin-left: 600px;
+    margin-right: 600px;
     margin-top: 120px;
     text-align: center;
     color: #fff;
@@ -10,6 +10,20 @@ body{
 }
 h1,h2{
     color: #00FFA1;
+}
+a{
+  color: #ff6788;
+}
+.finalizado{
+  position: absolute;
+  font-size: 20px;
+  margin-left: 20px;
+  margin-top: 50px;
+  padding-top: 100px;
+  text-align: center;
+  width: 600px;
+  height: 200px;
+  background-color: black;
 }
 label{
     color: #00FFA1;

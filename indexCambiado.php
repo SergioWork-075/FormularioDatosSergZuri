@@ -1,5 +1,4 @@
 <?php
-session_start();
 //print_r($meses);
 
 ////DECLARO LAS VARIABLES DONDE GUARDO LOS VALUES DE LOS INPUT SIEMPRE QUE ESTEN CORRECTOS
@@ -13,7 +12,6 @@ $apelli = filter_input(INPUT_GET, 'apellido', FILTER_SANITIZE_STRING);
 
 $letrasNom = preg_match('@[^A-Za-záéíóúñüçÁÉÍÓÚÑÜÇ ]@', $nombre);
 $letrasApe = preg_match('@[^A-Za-zzáéíóúñüçÁÉÍÓÚÑÜÇ ]@', $apelli);
-$enviarSiNo = false;
 $contador = 0;
 
 /////COMPROBACION QUE NO ESCRIBA LETRAS////
@@ -42,7 +40,7 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
         $contador = 0;
         /////COMPROBACION LONGITUD////
         if (strlen($nombre) < 2) {
-            echo "NOMBRE:Tiene que contener al menos 2 caracteres<br/>";
+            echo "<a>NOMBRE:</a>Tiene que contener al menos 2 caracteres<br/>";
             $nombre="";
             $g_nombre="";
         }else{
@@ -50,7 +48,7 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
             $g_nombre=$nombre;
         }
         if (strlen($apelli) < 4) {
-            echo "APELLIDOS:Tiene que contener al menos 4 caracteres<br/>";
+            echo "<a>APELLIDOS:</a>Tiene que contener al menos 4 caracteres<br/>";
             $apelli ="";
             $g_apelli ="";
         }else{
@@ -58,7 +56,7 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
             $g_apelli=$apelli;
         }
         if (strlen($telef) != 9) {
-            echo "TELEFONO:No puede incluir mas de 9 numeros, y tampoco menos<br/>";
+            echo "<a>TELEFONO:</a>No puede incluir mas de 9 numeros, y tampoco menos<br/>";
             $telef ="";
             $g_telef ="";
         }else{
@@ -67,7 +65,7 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
         }
         /////COMPROBACION QUE NO ESCRIBA NUMEROS////
         if ($letrasNom) {
-            echo "NOMBRE:Has introducido algun caracter que no es una letra<br/>";
+            echo "<a>NOMBRE:</a>Has introducido algun caracter que no es una letra<br/>";
             $nombre="";
             $g_nombre="";
 
@@ -76,7 +74,7 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
             $g_nombre=$nombre;
         }
         if ($letrasApe) {
-            echo "APELLIDO:Has introducido algun caracter que no es una letra<br/>";
+            echo "<a>APELLIDO:</a>Has introducido algun caracter que no es una letra<br/>";
             $apelli="";
             $g_apelli="";
         }else{
@@ -85,7 +83,7 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
         }
         /////COMPROBACION QUE NO ESCRIBA LETRAS////
         if ($numerosTlf) {
-            echo "TELEFONO:Has introducido algun caracter que no es un numero<br/>";
+            echo "<a>TELEFONO:</a>Has introducido algun caracter que no es un numero<br/>";
             $telef="";
             $g_telef="";
         }else{
@@ -93,7 +91,7 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
             $g_telef=$telef;
         }
         if ($contador==6) {
-            echo 'Validacion Completada. Pulse otra vez en "Enviar"';
+            echo 'Validacion Completada. Pulse otra vez en <a>"Enviar"</a>';
             $archivo="datos.txt";
             $file=fopen($archivo,"a");
             fwrite($file,"FORMULARIO:"."\n \n"."-NOMBRE: ".$nombre ."\n"."-APELLIDO: ". $apelli."\n"."-TLF: ".$telef);
@@ -116,11 +114,11 @@ $numerosTlf = preg_match('@[^0-9]@', $telef);
         }?>">
         <!-- PRIMERA PARTE -->
         <label>Nombre
-        <input name="nombre" type="text" placeholder="Escribe tu nombre..." value="<?php echo $g_nombre ?>"/></label>
+        <input name="nombre" type="text" placeholder="Escribe tu nombre..." value="<?php echo $g_nombre ?>"/></label><br>
         <label>Apellidos 
-        <input name="apellido" type="text" placeholder="Primero y segundo..." value="<?php echo $apelli ?>"/></label>
+        <input name="apellido" type="text" placeholder="Primero y segundo..." value="<?php echo $apelli ?>"/></label><br>
         <label>Teléfono 
-        <input name="telef" type="tel" placeholder="Teléfono móvil..." value="<?php echo $telef ?>"/></label>
+        <input name="telef" type="tel" placeholder="Teléfono móvil..." value="<?php echo $telef ?>"/></label><br>
         <input class="boton" type="submit" name="Siguiente" />
     </form>
     </div>

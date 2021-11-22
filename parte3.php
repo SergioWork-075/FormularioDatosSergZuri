@@ -35,38 +35,38 @@ $contador3=0;
         $contador3++;
     } else {
         $email = $_GET["validacionEmail"];
-        echo 'EMAIL:Mail mal introducido<br/>';
+        echo '<a>EMAIL:Mail mal introducido<br/>';
     }
     /////////////WEB//////////////////////
     if (!$webprueba) {
-        echo 'WEB:Mal introducido<br/>';
+        echo '<a>WEB:</a>Mal introducido<br/>';
     }else{
         $contador3++;
     }
     /////////////CONTRASEÑA//////////////////////
     if (!$especial) {
-        echo "PASS:La contraseña debe tener un caracter especial!";
+        echo "<a>PASS:</a>La contraseña debe tener un caracter especial!<br>";
     }else{
         $contador3++;
     }
     if (!$mayus || !$minus) {
-        echo "<br>PASS:La contraseña debe tener MAYUS y MINUS!";
+        echo "<a>PASS:</a>La contraseña debe tener MAYUS y MINUS!<br>";
     }else{
         $contador3++;
     }
     if (!$num) {
-        echo "<br>PASS:La contraseña debe tener almenos un número!";
+        echo "<a>PASS:</a>La contraseña debe tener almenos un número!<br>";
     }else{
         $contador3++;
     }
     if (strlen($contra) < 8 || strlen($contra) > 16) {
-        echo "<br>PASS:La contraseña debe tener entre 8 y 16 caracteres!";
+        echo "<a>PASS:</a>La contraseña debe tener entre 8 y 16 caracteres!<br>";
     }else{
         $contador3++;
     }
 
     if ($contador3==6) {
-        echo 'Validacion Completada. Pulse otra vez en "Enviar" para finalizar';
+        echo '<div class="finalizado"><a>Validacion Completada.</a> <br>Ha finalizado el formulario</div>';
 
         $archivo="datos.txt";
         $file=fopen($archivo,"a");
@@ -86,13 +86,13 @@ $contador3=0;
     <form method="get" action="parte3.php">
     <!-- TERCERA PARTE -->
     <label>Correo
-    <input name="validacionEmail" type="email" /></label>
-    <label>Contraseña
-    <input type="password" name="contra" value="" /></label>
+    <input name="validacionEmail" type="email" placeholder="Escriba su gmail..."/></label><br>
+    <label>Passw
+    <input type="password" name="contra" placeholder="Que sea segura..." /></label><br>
     <label>Web
-    <input name="validacionWeb" type="text" /></label>
+    <input name="validacionWeb" type="text" placeholder="Escriba su pagina..."/></label>
     <br>
-    <input class="boton" type="submit" name="Enviar" />
+    <input class="boton" type="submit" name="Enviar"  />
     </form>
     </div>
 </body>

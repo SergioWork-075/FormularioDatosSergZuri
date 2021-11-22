@@ -38,11 +38,12 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
 <body>
     <div class="formulario">
     <h1>Formulario de Acceso</h1>
+    <h5><a>Nota: </a>Seleccione la provincia antes de escribir los datos</h5>
     <?php
     if (isset($_GET['Siguiente'])) {
     /////COMPROBACION LONGITUD////
     if(strlen($ciudad)<4){
-        echo "CIUDAD:Tiene que contener al menos 4 caracteres<br/>";
+        echo "<a>CIUDAD:</a>Tiene que contener al menos 4 caracteres<br/>";
         $ciudad="";
         $g_ciudad="";
     }else{
@@ -50,7 +51,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
         $g_ciudad=$ciudad;
     }
     if(strlen($direccion)<4){
-        echo "DIRECCION:Tiene que contener al menos 4 caracteres<br/>";
+        echo "<a>DIRECCION:</a>Tiene que contener al menos 4 caracteres<br/>";
         $direccion="";
         $g_direccion="";
     }else{
@@ -58,7 +59,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
         $g_direccion=$direccion;
     }
     if(strlen($postal)!==5){
-        echo "POSTAL:Tiene que contener 5 numeros<br/>";
+        echo "<a>POSTAL:</a>Tiene que contener 5 numeros<br/>";
         $postal="";
         $g_postal="";
     }else{
@@ -67,7 +68,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
     }
     /////COMPROBACION QUE NO ESCRIBA NUMEROS////
     if ($letrasDir) {
-        echo "Direccion:Has introducido algun caracter que no es una letra<br/>";
+        echo "<a>Direccion</a>:Has introducido algun caracter que no es una letra<br/>";
         $direccion="";
         $g_direccion="";
     }else{
@@ -75,7 +76,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
         $g_direccion=$direccion;
     }
     if ($letrasCiu) {
-        echo "CIUDAD:Has introducido algun caracter que no es una letra<br/>";
+        echo "<a>CIUDAD:</a>Has introducido algun caracter que no es una letra<br/>";
         $ciudad="";
         $g_ciudad="";
     }else{
@@ -84,7 +85,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
     }
     /////COMPROBACION QUE NO ESCRIBA LETRAS////
     if ($numerosPos) {
-        echo "POSTAL:Has introducido algun caracter que no es un numero<br/>";
+        echo "<a>POSTAL:</a>Has introducido algun caracter que no es un numero<br/>";
         $postal="";
         $g_postal="";
     }else{
@@ -94,7 +95,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
 
     //MENSAJE PARA FINALIZAR
     if ($contador2==6) {
-        echo 'Validacion Completada. Pulse otra vez en "Enviar"';
+        echo 'Validacion Completada. Pulse otra vez en <a>"Enviar"</a>';
         $archivo="datos.txt";
         $file=fopen($archivo,"a");
         fwrite($file,"CIUDAD: ".$ciudad."\n"."DIRECCIÓN: ".$direccion."\n"."DIRECCIÓN: ".$postal);
@@ -117,10 +118,10 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
     
     <!-- SEGUNDA PARTE -->
     <label>Direccion
-    <input name="direccion" type="text" placeholder="Escriba su calle..."/></label>
+    <input name="direccion" type="text" placeholder="Escriba su calle..."/></label><br>
     <label>Ciudad
     <input name="ciudad" type="text" placeholder="Escriba su ciudad..."/></label><br>
-    <label>Provincia</label>
+    <label>Provincia</label><br/>
     <?php
     $meses[] = [];
     $string = file_get_contents("./archivo2.txt");
@@ -141,7 +142,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
                         <?php
                     }
                 }
-                ?> </select>
+                ?> </select> <br/>
  <?php
     }
     ?><?php
@@ -164,7 +165,7 @@ $numerosPos = preg_match('@[^0-9]@', $postal);
             }
         }
     } ?><br>
-    <input name="provincias2" readonly type="text" value="<?php echo $provincia2; ?>"/><br>
+    <input name="provincias2" readonly type="text" value="<?php echo $provincia2; ?>"/>
     <h2>Código postal</h2>
     <input name="postal" type="text" value="<?php echo $postal; ?>"/>
     <br>
